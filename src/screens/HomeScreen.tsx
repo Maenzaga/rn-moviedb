@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, FlatList, ListRenderItemInfo } from 'react-native';
+import {
+  SafeAreaView,
+  FlatList,
+  ListRenderItemInfo,
+  Button,
+} from 'react-native';
 import { AxiosResponse } from 'axios';
-import { ListItemView } from './ListView/ListItemView';
+import { ListItemView } from '../components/ListView/ListItemView';
 import {
   getCall,
   MovieListingResponse,
   MovieResponse,
 } from '../api/MovieSearchService';
 import { Movie } from 'types';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const App = () => {
+interface HomeScreenProps {
+  navigation: ProfileScreenNavigationProp;
+}
+type ProfileScreenNavigationProp = StackNavigationProp<any, 'HomeScreen'>;
+
+export const HomeScreen = (props: HomeScreenProps) => {
   const renderItem = (info: ListRenderItemInfo<Movie>) => {
-    return <ListItemView movie={info.item} />;
+    return <ListItemView navigation={props.navigation} movie={info.item} />;
   };
 
   const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
@@ -44,5 +55,3 @@ const App = () => {
     </SafeAreaView>
   );
 };
-
-export default App;
