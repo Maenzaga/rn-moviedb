@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, Text } from 'react-native';
-import { Movie } from '../../../types';
+import { Movie } from '../../types';
 
 interface ListViewProps {
   movie: Movie;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, FlatList, ListRenderItemInfo } from 'react-native';
-import { ListItemView } from './src/components/ListView/ListItemView';
+import { AxiosResponse } from 'axios';
+import { ListItemView } from './ListView/ListItemView';
 import {
   getCall,
   MovieListingResponse,
   MovieResponse,
-} from './MovieSearchService';
-import { AxiosResponse } from 'axios';
-import { Movie } from './types';
+} from '../api/MovieSearchService';
+import { Movie } from 'types';
 
 const App = () => {
   const renderItem = (info: ListRenderItemInfo<Movie>) => {
@@ -39,7 +39,7 @@ const App = () => {
       <FlatList
         data={popularMovies}
         renderItem={renderItem}
-        keyExtractor={(item: Movie, index: number) => index.toString()}
+        keyExtractor={(_, index: number) => index.toString()}
       />
     </SafeAreaView>
   );
