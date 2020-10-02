@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { apiKey } from 'config';
 
 const instance = axios.create({
   baseURL: 'http://api.themoviedb.org/3',
@@ -7,7 +8,7 @@ const instance = axios.create({
 export const getCall = () =>
   instance.get('movie/popular', {
     params: {
-      api_key: '93aea0c77bc168d8bbce3918cefefa45',
+      api_key: apiKey,
     },
   });
 
