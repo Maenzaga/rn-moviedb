@@ -7,7 +7,7 @@ interface ListViewProps {
   movie: Movie;
   navigation: ProfileScreenNavigationProp;
 }
-type ProfileScreenNavigationProp = StackNavigationProp<any, 'HomeScreen'>;
+type ProfileScreenNavigationProp = StackNavigationProp<any, 'ListScreen'>;
 
 export const ListItemView = (props: ListViewProps) => {
   const onPress = () => {

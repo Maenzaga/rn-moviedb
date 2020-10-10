@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
-import { Movie } from 'app/types';
 
 type ProfileScreenRouteProp = RouteProp<
   { Details: { movieName: string } },

@@ -1,57 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import {
-  SafeAreaView,
-  FlatList,
-  ListRenderItemInfo,
-  Button,
-} from 'react-native';
-import { AxiosResponse } from 'axios';
-import { ListItemView } from '../components/ListView/ListItemView';
-import {
-  getCall,
-  MovieListingResponse,
-  MovieResponse,
-} from '../api/MovieSearchService';
-import { Movie } from 'types';
-import { StackNavigationProp } from '@react-navigation/stack';
+import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Button, View, Text } from 'react-native';
 
-interface HomeScreenProps {
-  navigation: ProfileScreenNavigationProp;
+interface NavigationButtonProps {
+  text: string;
+  screenName: string;
 }
-type ProfileScreenNavigationProp = StackNavigationProp<any, 'HomeScreen'>;
 
-export const HomeScreen = (props: HomeScreenProps) => {
-  const renderItem = (info: ListRenderItemInfo<Movie>) => {
-    return <ListItemView navigation={props.navigation} movie={info.item} />;
+export const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  const navigateToList = (screenName: string) => {
+    navigation.navigate(screenName);
   };
 
-  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
-
-  useEffect(() => {
-    getCall()
-      .then((data: AxiosResponse<MovieListingResponse>) => {
-        const realmovies: Movie[] = data.data.results.map(
-          (item: MovieResponse) => ({
-            title: item.title,
-            image: item.poster_path,
-            popularity: item.popularity,
-            voteAverage: item.vote_average,
-          }),
-        );
-        setPopularMovies(realmovies);
-      })
-      .catch((err: any) => {
-        console.error('Something went wrong', err);
-      });
-  }, []);
+  const NavigationButton = (props: NavigationButtonProps) => {
+    const { text, screenName } = props;
+    return (
+      <View style={{ alignSelf: 'center' }}>
+        <Button
+          title={text}
+          onPress={() => {
+            navigateToList(screenName);
+          }}
+        />
+      </View>
+    );
+  };
 
   return (
-    <SafeAreaView>
-      <FlatList
-        data={popularMovies}
-        renderItem={renderItem}
-        keyExtractor={(_, index: number) => index.toString()}
-      />
-    </SafeAreaView>
+    <View style={{ padding: 4 }}>
+      <Text>MOVIE DB</Text>
+      <NavigationButton text="Movie List" screenName="List" />
+    </View>
   );
 };
