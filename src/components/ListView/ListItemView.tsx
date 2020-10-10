@@ -1,15 +1,14 @@
 import React from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { ListScreenNavigationProps } from 'app/screens/ListScreen';
 import { Movie } from '../../types';
-import { StackNavigationProp } from '@react-navigation/stack';
 
-interface ListViewProps {
+interface ListItemViewProps {
   movie: Movie;
-  navigation: ProfileScreenNavigationProp;
+  navigation: ListScreenNavigationProps;
 }
-type ProfileScreenNavigationProp = StackNavigationProp<any, 'ListScreen'>;
 
-export const ListItemView = (props: ListViewProps) => {
+export const ListItemView = (props: ListItemViewProps) => {
   const onPress = () => {
     props.navigation.navigate('Details', { movieName: `${props.movie.title}` });
   };

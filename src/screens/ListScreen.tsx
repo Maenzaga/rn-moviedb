@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, FlatList, ListRenderItemInfo } from 'react-native';
+import { NavigationProp } from '@react-navigation/native';
 import { AxiosResponse } from 'axios';
 import { ListItemView } from '../components/ListView/ListItemView';
 import {
@@ -8,12 +9,15 @@ import {
   MovieResponse,
 } from '../api/MovieSearchService';
 import { Movie } from '../types';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 interface ListScreenProps {
-  navigation: ProfileScreenNavigationProp;
+  navigation: ListScreenNavigationProps;
 }
-type ProfileScreenNavigationProp = StackNavigationProp<any, 'ListScreen'>;
+
+export type ListScreenNavigationProps = NavigationProp<
+  { Details: { movieName: string } },
+  'Details'
+>;
 
 export const ListScreen = (props: ListScreenProps) => {
   const renderItem = (info: ListRenderItemInfo<Movie>) => {
